@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Коммерческая недвижимость">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9fb8c9"/>
+      <stop offset="1" stop-color="#c7d8e3"/>
+    </linearGradient>
+    <linearGradient id="bldg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a4a57"/>
+      <stop offset="1" stop-color="#222c34"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="720" fill="url(#sky)"/>
+  <rect x="0" y="540" width="1600" height="180" fill="#7d93a3" opacity="0.5"/>
+  <!-- back towers -->
+  <rect x="120" y="260" width="180" height="460" fill="#46586a"/>
+  <rect x="330" y="200" width="150" height="520" fill="#516273"/>
+  <rect x="1180" y="240" width="170" height="480" fill="#46586a"/>
+  <!-- main building -->
+  <rect x="520" y="180" width="560" height="540" fill="url(#bldg)"/>
+  <g fill="#86AEC8" opacity="0.85">
+    <rect x="560" y="230" width="60" height="60" rx="4"/>
+    <rect x="650" y="230" width="60" height="60" rx="4"/>
+    <rect x="740" y="230" width="60" height="60" rx="4"/>
+    <rect x="830" y="230" width="60" height="60" rx="4"/>
+    <rect x="920" y="230" width="60" height="60" rx="4"/>
+    <rect x="560" y="320" width="60" height="60" rx="4"/>
+    <rect x="650" y="320" width="60" height="60" rx="4"/>
+    <rect x="740" y="320" width="60" height="60" rx="4"/>
+    <rect x="830" y="320" width="60" height="60" rx="4"/>
+    <rect x="920" y="320" width="60" height="60" rx="4"/>
+    <rect x="560" y="410" width="60" height="60" rx="4"/>
+    <rect x="650" y="410" width="60" height="60" rx="4"/>
+    <rect x="740" y="410" width="60" height="60" rx="4"/>
+    <rect x="830" y="410" width="60" height="60" rx="4"/>
+    <rect x="920" y="410" width="60" height="60" rx="4"/>
+    <rect x="560" y="500" width="60" height="60" rx="4"/>
+    <rect x="650" y="500" width="60" height="60" rx="4"/>
+    <rect x="740" y="500" width="60" height="60" rx="4"/>
+    <rect x="830" y="500" width="60" height="60" rx="4"/>
+    <rect x="920" y="500" width="60" height="60" rx="4"/>
+  </g>
+  <rect x="760" y="600" width="80" height="120" fill="#1c252c"/>
+</svg>

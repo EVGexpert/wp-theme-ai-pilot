@@ -37,18 +37,26 @@
                                               "type":  "string",
                                               "default":  ""
                                           },
-                       "showPhone":  {
-                                         "type":  "boolean",
-                                         "default":  true
-                                     },
-                       "showEmail":  {
-                                         "type":  "boolean",
-                                         "default":  true
-                                     },
-                       "showMessage":  {
-                                           "type":  "boolean",
-                                           "default":  true
-                                       }
+                    "showPhone":  {
+                                          "type":  "boolean",
+                                          "default":  true
+                                      },
+                                      "phoneRequired":  {
+                                          "type":  "boolean",
+                                          "default":  false
+                                      },
+                    "showEmail":  {
+                                          "type":  "boolean",
+                                          "default":  true
+                                      },
+                    "showMessage":  {
+                                            "type":  "boolean",
+                                            "default":  true
+                                        },
+                    "redirectUrl":  {
+                                            "type":  "string",
+                                            "default":  ""
+                                        }
                    },
     "render":  "file:./render.php"
 }

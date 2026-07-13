@@ -70,7 +70,20 @@
     "layout": { "contentSize": "760px", "wideSize": "1180px" },
     "dimensions": { "minHeight": true },
     "position": { "sticky": true },
-    "lightbox": { "enabled": true, "allowEditing": true }
+    "lightbox": { "enabled": true, "allowEditing": true },
+    "custom": {
+      "aipilot-container": "1180px",
+      "aipilot-gutter-desktop": "32px",
+      "aipilot-gutter-tablet": "24px",
+      "aipilot-gutter-mobile": "16px",
+      "aipilot-section-space": "96px",
+      "aipilot-section-space-tablet": "72px",
+      "aipilot-section-space-mobile": "56px",
+      "aipilot-radius-card": "14px",
+      "aipilot-radius-large": "22px",
+      "aipilot-text-muted": "#707579",
+      "aipilot-border": "#e6e8ea"
+    }
   },
   "styles": {
     "typography": {

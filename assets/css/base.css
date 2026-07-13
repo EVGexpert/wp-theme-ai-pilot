@@ -5,11 +5,24 @@
 	--radius-md: 14px;
 	--radius-lg: 22px;
 	--radius-pill: 999px;
+	/* Mirror of theme.json custom tokens for direct CSS use */
+	--aipilot-container: 1180px;
+	--aipilot-gutter-desktop: 32px;
+	--aipilot-gutter-tablet: 24px;
+	--aipilot-gutter-mobile: 16px;
+	--aipilot-section-space: 96px;
+	--aipilot-section-space-tablet: 72px;
+	--aipilot-section-space-mobile: 56px;
+	--aipilot-radius-card: 14px;
+	--aipilot-radius-large: 22px;
+	--aipilot-text-muted: #707579;
+	--aipilot-border: #e6e8ea;
 }
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+body { overflow-x: hidden; }
 img { max-width: 100%; height: auto; display: block; }
 
 /* ── Skip link ── */
@@ -19,25 +32,51 @@ img { max-width: 100%; height: auto; display: block; }
 /* ── Focus ── */
 :focus-visible { outline: 2px solid var(--wp--preset--color--primary); outline-offset: 2px; }
 
+/* ── Layout primitives ── */
+.site-container {
+	max-width: var(--aipilot-container);
+	margin-inline: auto;
+	padding-inline: var(--aipilot-gutter-desktop);
+	width: 100%;
+}
+.site-section {
+	padding-block: var(--aipilot-section-space);
+}
+.site-section__header { margin-bottom: var(--wp--preset--spacing--xl, 2rem); }
+.site-section__title { margin: 0; }
+.site-section__description {
+	margin-top: 0.5rem;
+	color: var(--aipilot-text-muted);
+	font-size: 1rem;
+	max-width: 52ch;
+}
+
 /* ── HEADER ── */
 .site-header {
 	position: sticky; top: 0; z-index: 100;
-	background: #fff; border-bottom: 1px solid var(--wp--preset--color--border);
+	background: #fff; border-bottom: 1px solid var(--aipilot-border);
 }
 .site-header > .wp-block-group {
-	max-width: var(--wp--style--global--wide-size);
-	margin: 0 auto; padding: 0 32px;
+	max-width: var(--aipilot-container);
+	margin: 0 auto; padding: 0 var(--aipilot-gutter-desktop);
 	min-height: 72px;
 	display: flex; align-items: center; justify-content: space-between;
 }
+.site-header .wp-block-navigation__toggle { min-width: 44px; min-height: 44px; }
 
-/* ── FOOTER ── */
+/* ── FOOTER (white, compact) ── */
 .site-footer {
-	background: #252525; color: #ccc;
-	padding: 64px 32px 40px;
+	background: #fff; color: var(--wp--preset--color--text);
+	border-top: 1px solid var(--aipilot-border);
+	padding: 56px var(--aipilot-gutter-desktop) 32px;
 }
-.site-footer a { color: #ccc; text-decoration: none; }
-.site-footer a:hover { color: var(--wp--preset--color--primary); }
+.site-footer > .wp-block-group:first-child {
+	max-width: var(--aipilot-container);
+	margin: 0 auto;
+	width: 100%;
+}
+.site-footer a { color: var(--wp--preset--color--text); text-decoration: none; }
+.site-footer a:hover { color: var(--wp--preset--color--primary-dark); }
 
 /* ── Main content ── */
 .site-main {
@@ -48,12 +87,21 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ── Mobile ── */
 @media (max-width: 782px) {
-	.site-header > .wp-block-group { padding: 0 16px; }
-	.site-footer { padding: 48px 16px 32px; }
+	.site-header > .wp-block-group { padding: 0 var(--aipilot-gutter-mobile); }
+	.site-footer { padding: 40px var(--aipilot-gutter-mobile) 24px; }
+	.site-section { padding-block: var(--aipilot-section-space-mobile); }
+	.site-container { padding-inline: var(--aipilot-gutter-mobile); }
+}
+@media (min-width: 783px) and (max-width: 1024px) {
+	.site-header > .wp-block-group { padding: 0 var(--aipilot-gutter-tablet); }
+	.site-section { padding-block: var(--aipilot-section-space-tablet); }
 }
 
 /* ── Smooth animation ── */
 @media (prefers-reduced-motion: no-preference) {
 	.fade-in { animation: fadeIn .6s ease-out; }
 	@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+}
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
 }

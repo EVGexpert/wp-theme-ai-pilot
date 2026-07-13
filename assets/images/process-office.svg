@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Офисное помещение">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef3f6"/>
+      <stop offset="1" stop-color="#dde6ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#wall)"/>
+  <rect x="0" y="560" width="600" height="240" fill="#c9d4dc"/>
+  <rect x="60" y="120" width="220" height="320" fill="#86AEC8" opacity="0.25"/>
+  <rect x="320" y="120" width="220" height="320" fill="#86AEC8" opacity="0.25"/>
+  <g stroke="#5E8FAA" stroke-width="6" fill="none">
+    <rect x="60" y="120" width="220" height="320"/>
+    <line x1="170" y1="120" x2="170" y2="440"/>
+    <line x1="60" y1="280" x2="280" y2="280"/>
+    <rect x="320" y="120" width="220" height="320"/>
+    <line x1="430" y1="120" x2="430" y2="440"/>
+    <line x1="320" y1="280" x2="540" y2="280"/>
+  </g>
+  <rect x="240" y="440" width="120" height="160" fill="#3a4a57"/>
+  <circle cx="540" cy="180" r="60" fill="#86AEC8" opacity="0.5"/>
+</svg>

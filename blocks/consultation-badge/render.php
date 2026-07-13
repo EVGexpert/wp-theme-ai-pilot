@@ -5,13 +5,19 @@ $link    = $attributes['linkUrl'] ?? '';
 $size    = $attributes['size'] ?? '160px';
 $hideMob = $attributes['hideOnMobile'] ?? false;
 
-$tag = $link ? 'a' : 'div';
-$attrs = $link ? ' href="' . esc_url($link) . '"' : '';
+$classes = 'aipilot-consultation-badge';
+if ( $hideMob ) {
+	$classes .= ' aipilot-consultation-badge--hide-mobile';
+}
+$wrapper_attrs = get_block_wrapper_attributes( array(
+	'class' => $classes,
+	'style' => sprintf( '--badge-size:%s;', esc_attr( $size ) ),
+) );
+
+$tag        = $link ? 'a' : 'div';
+$link_attrs = $link ? ' href="' . esc_url( $link ) . '"' : '';
 ?>
-<<?php echo $tag; ?><?php echo $attrs; ?> <?php echo get_block_wrapper_attributes(['class' => 'aipilot-badge' . ($hideMob ? ' aipilot-badge--hide-mobile' : '')]); ?> style="width:<?php echo esc_attr($size); ?>;height:<?php echo esc_attr($size); ?>;border-radius:50%;background:var(--wp--preset--color--primary);color:var(--wp--preset--color--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;font-weight:600;padding:1rem;box-sizing:border-box;">
-	<div class="aipilot-badge__text" style="font-size:0.8125rem;line-height:1.3;"><?php echo esc_html($text); ?></div>
-	<?php if ($sub): ?><div class="aipilot-badge__sub" style="font-size:0.75rem;opacity:0.85;margin-top:0.25rem;"><?php echo esc_html($sub); ?></div><?php endif; ?>
+<<?php echo $tag; ?><?php echo $link_attrs; ?> <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+	<span class="aipilot-consultation-badge__text"><?php echo esc_html( $text ); ?></span>
+	<?php if ( $sub ) : ?><span class="aipilot-consultation-badge__sub"><?php echo esc_html( $sub ); ?></span><?php endif; ?>
 </<?php echo $tag; ?>>
-<style>
-@media (max-width:782px) { .aipilot-badge--hide-mobile { display:none; } }
-</style>

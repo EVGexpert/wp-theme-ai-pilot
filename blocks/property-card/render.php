@@ -8,4 +8,4 @@ if ( ! function_exists( 'aipilot_render_property_card' ) ) {
 	return '';
 }
 
-echo aipilot_render_property_card( $pid );
+echo aipilot_render_property_card( $pid, $attributes );

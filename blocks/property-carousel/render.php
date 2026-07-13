@@ -1,43 +1,65 @@
 <?php
-$mode       = $attributes['sourceMode'] ?? 'dynamic';
-$count      = $attributes['postCount'] ?? 6;
-$cards      = $attributes['cardsPerView'] ?? 3;
-$gap        = $attributes['gap'] ?? '24px';
-$tax        = $attributes['taxonomyFilter'] ?? '';
-$term       = $attributes['termId'] ?? 0;
-$showArrows = $attributes['showArrows'] ?? true;
-$autoplay   = $attributes['autoplay'] ?? true;
-$loop       = $attributes['loop'] ?? true;
+$mode        = $attributes['sourceMode'] ?? 'dynamic';
+$count       = $attributes['postCount'] ?? 6;
+$cards       = $attributes['cardsPerView'] ?? 3;
+$tablet      = $attributes['tabletCardsPerView'] ?? 2;
+$mobile      = $attributes['mobileCardsPerView'] ?? 1;
+$gap         = $attributes['gap'] ?? '24px';
+$tax         = $attributes['taxonomyFilter'] ?? '';
+$term        = $attributes['termId'] ?? 0;
+$show_arrows = $attributes['showArrows'] ?? true;
+$show_dots   = $attributes['showPagination'] ?? true;
+$autoplay    = $attributes['autoplay'] ?? false;
+$loop        = $attributes['loop'] ?? true;
 
-$posts = [];
+$posts = array();
 if ( $mode === 'dynamic' ) {
 	if ( function_exists( 'aipilot_render_property_card' ) ) {
-		$args = ['post_type' => 'property', 'posts_per_page' => $count, 'post_status' => 'publish'];
+		$args = array(
+			'post_type'      => 'property',
+			'posts_per_page' => $count,
+			'post_status'    => 'publish',
+			'orderby'        => 'date',
+			'order'          => 'DESC',
+		);
 		if ( $tax && $term ) {
-			$args['tax_query'] = [[ 'taxonomy' => $tax, 'field' => 'term_id', 'terms' => $term ]];
+			$args['tax_query'] = array( array( 'taxonomy' => $tax, 'field' => 'term_id', 'terms' => $term ) );
 		}
 		$posts = get_posts( $args );
 	}
 }
 
 $carousel_id = 'aipilot-carousel-' . wp_unique_id();
+
+$wrapper_attrs = get_block_wrapper_attributes( array(
+	'class' => 'aipilot-carousel' . ( $loop ? ' is-loop' : '' ),
+	'style' => sprintf( '--carousel-gap:%s;--carousel-cards:%d;--carousel-cards-tablet:%d;--carousel-cards-mobile:%d;', esc_attr( $gap ), (int) $cards, (int) $tablet, (int) $mobile ),
+	'data-autoplay'     => $autoplay ? 'true' : 'false',
+	'data-loop'         => $loop ? 'true' : 'false',
+	'data-cards'        => (int) $cards,
+	'data-cards-tablet' => (int) $tablet,
+	'data-cards-mobile' => (int) $mobile,
+) );
 ?>
-<div <?php echo get_block_wrapper_attributes(['class' => 'aipilot-carousel']); ?> id="<?php echo esc_attr($carousel_id); ?>">
-	<div class="aipilot-carousel__viewport" style="overflow:hidden;position:relative;">
-		<div class="aipilot-carousel__track" style="display:flex;gap:<?php echo esc_attr($gap); ?>;transition:transform 0.4s ease;" data-cards="<?php echo (int)$cards; ?>">
-			<?php if ($mode === 'dynamic'): ?>
-				<?php foreach ($posts as $p): ?>
-					<div class="aipilot-carousel__slide" style="flex:0 0 calc((100% - <?php echo esc_attr($gap); ?> * <?php echo (int)($cards-1); ?>) / <?php echo (int)$cards; ?>);">
-						<?php echo aipilot_render_property_card($p->ID); ?>
+<div <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> id="<?php echo esc_attr( $carousel_id ); ?>">
+	<div class="aipilot-carousel__viewport">
+		<div class="aipilot-carousel__track">
+			<?php if ( $mode === 'dynamic' ) : ?>
+				<?php foreach ( $posts as $p ) : ?>
+					<div class="aipilot-carousel__slide">
+						<?php echo aipilot_render_property_card( $p->ID ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</div>
 				<?php endforeach; ?>
-			<?php else: ?>
-				<?php echo $content; ?>
+			<?php else : ?>
+				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php endif; ?>
 		</div>
 	</div>
-	<?php if ($showArrows): ?>
-	<button class="aipilot-carousel__prev" aria-label="Предыдущие" style="position:absolute;top:50%;left:0;transform:translateY(-50%);background:var(--wp--preset--color--surface);border:1px solid var(--wp--preset--color--border);border-radius:50%;width:44px;height:44px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;">←</button>
-	<button class="aipilot-carousel__next" aria-label="Следующие" style="position:absolute;top:50%;right:0;transform:translateY(-50%);background:var(--wp--preset--color--surface);border:1px solid var(--wp--preset--color--border);border-radius:50%;width:44px;height:44px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;">→</button>
+	<?php if ( $show_arrows ) : ?>
+	<button class="aipilot-carousel__prev" aria-label="Предыдущие слайды">&larr;</button>
+	<button class="aipilot-carousel__next" aria-label="Следующие слайды">&rarr;</button>
+	<?php endif; ?>
+	<?php if ( $show_dots ) : ?>
+	<div class="aipilot-carousel__dots" role="tablist" aria-label="Слайды каталога"></div>
 	<?php endif; ?>
 </div>

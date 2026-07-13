@@ -58,6 +58,10 @@ function aipilot_demo_enqueue_assets() {
 	wp_enqueue_style( 'aipilot-demo-blocks', get_template_directory_uri() . '/blocks/blocks.css', array(), aipilot_asset_version( '/blocks/blocks.css' ) );
 	wp_enqueue_script( 'aipilot-demo-theme', get_template_directory_uri() . '/assets/js/theme.js', array(), aipilot_asset_version( '/assets/js/theme.js' ), true );
 	wp_enqueue_script( 'aipilot-demo-frontend', get_template_directory_uri() . '/blocks/frontend.js', array(), aipilot_asset_version( '/blocks/frontend.js' ), true );
+	wp_localize_script( 'aipilot-demo-frontend', 'aipilotFrontend', array(
+		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+		'nonce'   => wp_create_nonce( 'aipilot_lead_form' ),
+	) );
 }
 add_action( 'wp_enqueue_scripts', 'aipilot_demo_enqueue_assets' );
 
@@ -182,9 +186,18 @@ add_action( 'init', 'aipilot_register_blocks' );
 // ═══════════════════════════════════════════
 // DYNAMIC RENDER HELPERS
 // ═══════════════════════════════════════════
-function aipilot_render_property_card( $post_id = null ) {
+function aipilot_render_property_card( $post_id = null, $attrs = array() ) {
 	if ( ! $post_id ) $post_id = get_the_ID();
 	if ( ! $post_id || 'property' !== get_post_type( $post_id ) ) return '';
+
+	$variant = $attrs['variant'] ?? 'detailed';
+	$show_image   = $attrs['showImage'] ?? true;
+	$show_badge   = $attrs['showBadge'] ?? true;
+	$show_title   = $attrs['showTitle'] ?? true;
+	$show_price   = $attrs['showPrice'] ?? true;
+	$show_area    = $attrs['showArea'] ?? true;
+	$show_address = $attrs['showAddress'] ?? true;
+	$show_excerpt = $attrs['showExcerpt'] ?? false;
 
 	$title  = get_the_title( $post_id );
 	$url    = get_permalink( $post_id );
@@ -197,19 +210,33 @@ function aipilot_render_property_card( $post_id = null ) {
 	$badge  = get_post_meta( $post_id, 'property_badge', true );
 	$excerpt= get_the_excerpt( $post_id );
 
+	$wrapper_attrs = get_block_wrapper_attributes( array(
+		'class' => 'aipilot-property-card is-variant-' . sanitize_html_class( $variant ),
+	) );
+
 	ob_start(); ?>
-	<div class="aipilot-property-card" <?php echo get_block_wrapper_attributes(); ?>>
-		<a href="<?php echo esc_url($url); ?>" class="property-card-link" aria-label="<?php echo esc_attr($title); ?>">
-			<?php if ($img_id): ?><div class="property-card-image"><?php echo wp_get_attachment_image($img_id, 'large', false, array('style'=>'width:100%;aspect-ratio:16/9;object-fit:cover;')); ?></div><?php endif; ?>
-			<?php if ($badge): ?><span class="property-card-badge" style="position:absolute;top:12px;left:12px;background:var(--wp--preset--color--primary);color:#fff;padding:0.25rem 0.75rem;border-radius:999px;font-size:0.75rem;font-weight:600;z-index:1;"><?php echo esc_html($badge); ?></span><?php endif; ?>
-			<div class="property-card-content" style="padding:1rem;">
-				<h3 style="margin:0 0 0.5rem;font-size:1.0625rem;font-weight:600;"><?php echo esc_html($title); ?></h3>
-				<div style="display:flex;flex-wrap:wrap;gap:0.5rem 1rem;font-size:0.8125rem;color:var(--wp--preset--color--text-secondary);">
-					<?php if ($area): ?><span><?php echo esc_html($area.' '.$area_u); ?></span><?php endif; ?>
-					<?php if ($price): ?><span style="font-weight:600;color:var(--wp--preset--color--text);"><?php echo esc_html($price.' '.$price_u); ?></span><?php endif; ?>
-					<?php if ($addr): ?><span><?php echo esc_html($addr); ?></span><?php endif; ?>
+	<div <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+		<a href="<?php echo esc_url( $url ); ?>" class="property-card-link" aria-label="<?php echo esc_attr( $title ); ?>">
+			<?php if ( $show_image && $img_id ) : ?>
+			<div class="property-card-image"><?php echo wp_get_attachment_image( $img_id, 'large', false, array( 'loading' => 'lazy', 'decoding' => 'async' ) ); ?></div>
+			<?php endif; ?>
+			<?php if ( $show_badge && $badge ) : ?>
+			<span class="property-card-badge"><?php echo esc_html( $badge ); ?></span>
+			<?php endif; ?>
+			<div class="property-card-content">
+				<?php if ( $show_title ) : ?>
+				<h3><?php echo esc_html( $title ); ?></h3>
+				<?php endif; ?>
+				<?php if ( $show_price || $show_area || $show_address ) : ?>
+				<div class="property-card-meta">
+					<?php if ( $show_area && $area ) : ?><span><?php echo esc_html( $area . ' ' . $area_u ); ?></span><?php endif; ?>
+					<?php if ( $show_price && $price ) : ?><span class="property-card-price"><?php echo esc_html( $price . ' ' . $price_u ); ?></span><?php endif; ?>
+					<?php if ( $show_address && $addr ) : ?><span><?php echo esc_html( $addr ); ?></span><?php endif; ?>
 				</div>
-				<?php if ($excerpt): ?><p style="font-size:0.875rem;color:var(--wp--preset--color--text-secondary);margin:0.5rem 0 0;"><?php echo esc_html(wp_trim_words($excerpt, 15)); ?></p><?php endif; ?>
+				<?php endif; ?>
+				<?php if ( $show_excerpt && $excerpt ) : ?>
+				<p class="property-card-excerpt"><?php echo esc_html( wp_trim_words( $excerpt, 15 ) ); ?></p>
+				<?php endif; ?>
 			</div>
 		</a>
 	</div><?php
@@ -246,13 +273,23 @@ function aipilot_handle_lead_form() {
 	$to      = get_option( 'admin_email' );
 	$subject = 'Заявка с сайта от ' . $name;
 	$body    = "Имя: {$name}\nТелефон: {$phone}";
-	if ( $email ) { $body .= "\nEmail: {$email}"; $headers[] = "Reply-To: {$email}"; }
-	if ( $message ) { $body .= "\nСообщение: {$message}"; }
+	// Build headers correctly BEFORE adding Reply-To.
 	$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
+	if ( $email ) {
+		$body     .= "\nEmail: {$email}";
+		$headers[] = 'Reply-To: ' . $email;
+	}
+	if ( $message ) {
+		$body .= "\nСообщение: {$message}";
+	}
 
 	$sent = wp_mail( $to, $subject, $body, $headers );
 	if ( $sent ) {
-		wp_send_json_success( array( 'message' => 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.' ) );
+		$redirect = isset( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
+		wp_send_json_success( array(
+			'message'  => 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.',
+			'redirect' => $redirect,
+		) );
 	} else {
 		wp_send_json_error( array( 'message' => 'Ошибка отправки. Попробуйте позже.' ), 500 );
 	}

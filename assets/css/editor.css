@@ -1,10 +1,24 @@
 /* === AIPilot Demo — Editor Styles === */
 
 .editor-styles-wrapper {
-	font-family: var(--wp--preset--font-family--system, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+	font-family: var(--wp--preset--font-family--inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
 }
 
 .editor-styles-wrapper .is-root-container {
 	padding-left: 0;
 	padding-right: 0;
+	max-width: var(--aipilot-container, 1180px);
+}
+
+/* Match frontend section spacing in editor */
+.editor-styles-wrapper .section-padding {
+	padding-block: var(--aipilot-section-space, 96px);
+	padding-inline: var(--aipilot-gutter-desktop, 32px);
+}
+.editor-styles-wrapper .site-section {
+	padding-block: var(--aipilot-section-space, 96px);
+}
+@media (max-width: 782px) {
+	.editor-styles-wrapper .section-padding,
+	.editor-styles-wrapper .site-section { padding-block: var(--aipilot-section-space-mobile, 56px); }
 }

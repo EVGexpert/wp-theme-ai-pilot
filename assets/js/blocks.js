@@ -17,12 +17,16 @@
 	var InnerBlocks       = wp.blockEditor.InnerBlocks;
 	var __                = wp.i18n.__;
 	var Placeholder       = wp.components.Placeholder;
+	var InspectorControls = wp.blockEditor.InspectorControls;
+	var PanelBody         = wp.components.PanelBody;
+	var ToggleControl     = wp.components.ToggleControl;
+	var TextControl       = wp.components.TextControl;
 
 	// 1. CONTAINER BLOCKS (with InnerBlocks)
 
 	registerBlockType( 'aipilot-demo-blocks/hero', {
 		edit: function() {
-			var blockProps = useBlockProps.save();
+			var blockProps = useBlockProps();
 			return el( 'div', blockProps,
 				el( Placeholder, {
 					icon: 'cover-image',
@@ -41,7 +45,7 @@
 
 	registerBlockType( 'aipilot-demo-blocks/stats-grid', {
 		edit: function() {
-			var blockProps = useBlockProps.save( { className: 'aipilot-stats-grid' } );
+			var blockProps = useBlockProps( { className: 'aipilot-stats-grid' } );
 			return el( 'div', blockProps,
 				el( InnerBlocks, {
 					allowedBlocks: [ 'aipilot-demo-blocks/stat-item' ],
@@ -54,7 +58,7 @@
 
 	registerBlockType( 'aipilot-demo-blocks/logo-strip', {
 		edit: function() {
-			var blockProps = useBlockProps.save( { className: 'aipilot-logo-strip' } );
+			var blockProps = useBlockProps( { className: 'aipilot-logo-strip' } );
 			return el( 'div', blockProps,
 				el( InnerBlocks, {
 					allowedBlocks: [ 'aipilot-demo-blocks/logo-item' ],
@@ -67,9 +71,30 @@
 	} );
 
 	registerBlockType( 'aipilot-demo-blocks/process-list', {
-		edit: function() {
-			var blockProps = useBlockProps.save( { className: 'aipilot-process-list' } );
+		edit: function( props ) {
+			var a = props.attributes;
+			var set = props.setAttributes;
+			var blockProps = useBlockProps( { className: 'aipilot-process-list' } );
 			return el( 'div', blockProps,
+				el( InspectorControls, null,
+					el( PanelBody, { title: __( 'Process Settings', 'aipilot-demo' ), initialOpen: true },
+						el( ToggleControl, {
+							label: __( 'Show dividers', 'aipilot-demo' ),
+							checked: !! a.showDividers,
+							onChange: function( v ) { set( { showDividers: v } ); }
+						} ),
+						el( ToggleControl, {
+							label: __( 'Show numbers', 'aipilot-demo' ),
+							checked: !! a.showNumbers,
+							onChange: function( v ) { set( { showNumbers: v } ); }
+						} ),
+						el( TextControl, {
+							label: __( 'Gap (px)', 'aipilot-demo' ),
+							value: a.gap,
+							onChange: function( v ) { set( { gap: v } ); }
+						} )
+					)
+				),
 				el( InnerBlocks, {
 					allowedBlocks: [ 'aipilot-demo-blocks/process-step' ],
 					renderAppender: InnerBlocks.ButtonBlockAppender
@@ -81,7 +106,7 @@
 
 	registerBlockType( 'aipilot-demo-blocks/property-carousel', {
 		edit: function( props ) {
-			var blockProps = useBlockProps.save( { className: 'aipilot-carousel' } );
+			var blockProps = useBlockProps( { className: 'aipilot-carousel' } );
 			var isManual = ( props.attributes.sourceMode === 'manual' );
 			if ( ! isManual ) {
 				return el( 'div', blockProps,
@@ -102,9 +127,41 @@
 	} );
 
 	registerBlockType( 'aipilot-demo-blocks/testimonial-slider', {
-		edit: function() {
-			var blockProps = useBlockProps.save( { className: 'aipilot-testimonial-slider' } );
+		edit: function( props ) {
+			var a = props.attributes;
+			var set = props.setAttributes;
+			var blockProps = useBlockProps( { className: 'aipilot-testimonial-slider' } );
 			return el( 'div', blockProps,
+				el( InspectorControls, null,
+					el( PanelBody, { title: __( 'Slider Settings', 'aipilot-demo' ), initialOpen: true },
+						el( ToggleControl, {
+							label: __( 'Show arrows', 'aipilot-demo' ),
+							checked: !! a.showArrows,
+							onChange: function( v ) { set( { showArrows: v } ); }
+						} ),
+						el( ToggleControl, {
+							label: __( 'Show dots', 'aipilot-demo' ),
+							checked: !! a.showDots,
+							onChange: function( v ) { set( { showDots: v } ); }
+						} ),
+						el( ToggleControl, {
+							label: __( 'Autoplay', 'aipilot-demo' ),
+							checked: !! a.autoplay,
+							onChange: function( v ) { set( { autoplay: v } ); }
+						} ),
+						el( ToggleControl, {
+							label: __( 'Loop', 'aipilot-demo' ),
+							checked: !! a.loop,
+							onChange: function( v ) { set( { loop: v } ); }
+						} ),
+						el( TextControl, {
+							type: 'number',
+							label: __( 'Cards per view', 'aipilot-demo' ),
+							value: a.cardsPerView,
+							onChange: function( v ) { set( { cardsPerView: parseInt( v, 10 ) || 1 } ); }
+						} )
+					)
+				),
 				el( InnerBlocks, {
 					allowedBlocks: [ 'aipilot-demo-blocks/testimonial-card' ],
 					orientation: 'horizontal',
@@ -120,7 +177,7 @@
 	registerBlockType( 'aipilot-demo-blocks/stat-item', {
 		edit: function( props ) {
 			var a = props.attributes;
-			var blockProps = useBlockProps.save( { className: 'aipilot-stat-item' } );
+			var blockProps = useBlockProps( { className: 'aipilot-stat-item' } );
 			return el( 'div', blockProps,
 				el( 'div', { className: 'aipilot-stat-item__value', style: { textAlign: 'center', fontWeight: '700', fontSize: '2rem' } },
 					a.prefix ? el( 'span', null, a.prefix ) : null,
@@ -136,7 +193,7 @@
 	registerBlockType( 'aipilot-demo-blocks/logo-item', {
 		edit: function( props ) {
 			var a = props.attributes;
-			var blockProps = useBlockProps.save( { className: 'aipilot-logo-item' } );
+			var blockProps = useBlockProps( { className: 'aipilot-logo-item' } );
 			if ( a.logoImageUrl ) {
 				return el( 'div', blockProps,
 					el( 'img', {
@@ -156,7 +213,7 @@
 	registerBlockType( 'aipilot-demo-blocks/process-step', {
 		edit: function( props ) {
 			var a = props.attributes;
-			var blockProps = useBlockProps.save( { className: 'aipilot-process-step' } );
+			var blockProps = useBlockProps( { className: 'aipilot-process-step' } );
 			return el( 'div', blockProps,
 				el( 'div', { className: 'aipilot-process-step__icon', style: { flexShrink: 0, width: '44px', height: '44px', borderRadius: '50%', background: '#252525', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 } }, a.stepNumber ),
 				el( 'div', { style: { flex: 1 } },
@@ -171,7 +228,7 @@
 	registerBlockType( 'aipilot-demo-blocks/testimonial-card', {
 		edit: function( props ) {
 			var a = props.attributes;
-			var blockProps = useBlockProps.save( { className: 'aipilot-testimonial-card' } );
+			var blockProps = useBlockProps( { className: 'aipilot-testimonial-card' } );
 			return el( 'div', blockProps,
 				el( 'blockquote', { style: { margin: '0 0 1rem', fontStyle: 'italic' } }, a.quote || '' ),
 				el( 'div', { style: { display: 'flex', alignItems: 'center', gap: '0.5rem' } },
@@ -192,7 +249,7 @@
 
 	registerBlockType( 'aipilot-demo-blocks/property-card', {
 		edit: function( props ) {
-			var blockProps = useBlockProps.save();
+			var blockProps = useBlockProps();
 			return el( 'div', blockProps,
 				el( ServerSideRender, {
 					block: 'aipilot-demo-blocks/property-card',
@@ -205,7 +262,7 @@
 
 	registerBlockType( 'aipilot-demo-blocks/process-media', {
 		edit: function( props ) {
-			var blockProps = useBlockProps.save();
+			var blockProps = useBlockProps();
 			return el( 'div', blockProps,
 				el( ServerSideRender, {
 					block: 'aipilot-demo-blocks/process-media',
@@ -218,7 +275,7 @@
 
 	registerBlockType( 'aipilot-demo-blocks/consultation-badge', {
 		edit: function( props ) {
-			var blockProps = useBlockProps.save();
+			var blockProps = useBlockProps();
 			return el( 'div', blockProps,
 				el( ServerSideRender, {
 					block: 'aipilot-demo-blocks/consultation-badge',
@@ -231,8 +288,59 @@
 
 	registerBlockType( 'aipilot-demo-blocks/lead-form', {
 		edit: function( props ) {
-			var blockProps = useBlockProps.save();
+			var a = props.attributes;
+			var set = props.setAttributes;
+			var blockProps = useBlockProps();
 			return el( 'div', blockProps,
+				el( InspectorControls, null,
+					el( PanelBody, { title: __( 'Form Settings', 'aipilot-demo' ), initialOpen: true },
+						el( TextControl, {
+							label: __( 'Submit button text', 'aipilot-demo' ),
+							value: a.submitText,
+							onChange: function( v ) { set( { submitText: v } ); }
+						} ),
+						el( TextControl, {
+							label: __( 'Success message', 'aipilot-demo' ),
+							value: a.successMessage,
+							onChange: function( v ) { set( { successMessage: v } ); }
+						} ),
+						el( TextControl, {
+							type: 'email',
+							label: __( 'Recipient email (override)', 'aipilot-demo' ),
+							value: a.recipientEmail,
+							help: __( 'Leave empty to use default from settings.', 'aipilot-demo' ),
+							onChange: function( v ) { set( { recipientEmail: v } ); }
+						} ),
+						el( TextControl, {
+							type: 'url',
+							label: __( 'Redirect URL after submit', 'aipilot-demo' ),
+							value: a.redirectUrl,
+							onChange: function( v ) { set( { redirectUrl: v } ); }
+						} )
+					),
+					el( PanelBody, { title: __( 'Fields', 'aipilot-demo' ), initialOpen: true },
+						el( ToggleControl, {
+							label: __( 'Show phone', 'aipilot-demo' ),
+							checked: !! a.showPhone,
+							onChange: function( v ) { set( { showPhone: v } ); }
+						} ),
+						a.showPhone ? el( ToggleControl, {
+							label: __( 'Phone required', 'aipilot-demo' ),
+							checked: !! a.phoneRequired,
+							onChange: function( v ) { set( { phoneRequired: v } ); }
+						} ) : null,
+						el( ToggleControl, {
+							label: __( 'Show email', 'aipilot-demo' ),
+							checked: !! a.showEmail,
+							onChange: function( v ) { set( { showEmail: v } ); }
+						} ),
+						el( ToggleControl, {
+							label: __( 'Show message', 'aipilot-demo' ),
+							checked: !! a.showMessage,
+							onChange: function( v ) { set( { showMessage: v } ); }
+						} )
+					)
+				),
 				el( ServerSideRender, {
 					block: 'aipilot-demo-blocks/lead-form',
 					attributes: props.attributes
