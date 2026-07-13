@@ -1,0 +1,51 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/testimonial-slider",
+    "title":  "Testimonial Slider",
+    "category":  "aipilot-demo",
+    "icon":  "testimonial",
+    "description":  "Testimonials carousel",
+    "supports":  {
+                     "anchor":  true,
+                     "align":  [
+                                   "wide",
+                                   "full"
+                               ],
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true,
+                                     "blockGap":  true
+                                 },
+                     "color":  {
+                                   "background":  true
+                               }
+                 },
+    "attributes":  {
+                       "autoplay":  {
+                                        "type":  "boolean",
+                                        "default":  true
+                                    },
+                       "loop":  {
+                                    "type":  "boolean",
+                                    "default":  true
+                                },
+                       "showArrows":  {
+                                          "type":  "boolean",
+                                          "default":  true
+                                      },
+                       "showDots":  {
+                                        "type":  "boolean",
+                                        "default":  false
+                                    },
+                       "cardsPerView":  {
+                                            "type":  "number",
+                                            "default":  2
+                                        },
+                       "gap":  {
+                                   "type":  "string",
+                                   "default":  "24px"
+                               }
+                   },
+    "render":  "file:./render.php"
+}

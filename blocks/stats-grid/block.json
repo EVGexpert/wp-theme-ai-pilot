@@ -1,0 +1,48 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/stats-grid",
+    "title":  "Stats Grid",
+    "category":  "aipilot-demo",
+    "icon":  "grid-view",
+    "description":  "Statistics grid layout",
+    "supports":  {
+                     "anchor":  true,
+                     "align":  [
+                                   "wide",
+                                   "full"
+                               ],
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true,
+                                     "blockGap":  true
+                                 },
+                     "color":  {
+                                   "background":  true,
+                                   "text":  true
+                               }
+                 },
+    "attributes":  {
+                       "columnsDesktop":  {
+                                              "type":  "number",
+                                              "default":  4
+                                          },
+                       "columnsTablet":  {
+                                             "type":  "number",
+                                             "default":  4
+                                         },
+                       "columnsMobile":  {
+                                             "type":  "number",
+                                             "default":  2
+                                         },
+                       "showDividers":  {
+                                            "type":  "boolean",
+                                            "default":  false
+                                        },
+                       "hasAnimation":  {
+                                            "type":  "boolean",
+                                            "default":  true
+                                        }
+                   },
+    "render":  "file:./render.php"
+}

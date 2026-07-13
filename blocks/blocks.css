@@ -1,0 +1,72 @@
+/* === AIPilot Blocks — Styles === */
+
+/* ── HERO ── */
+.aipilot-hero {
+	position: relative; overflow: hidden;
+	display: flex; align-items: center;
+}
+.aipilot-hero--left .aipilot-hero__content { text-align: left; max-width: 620px; }
+.aipilot-hero--right .aipilot-hero__content { text-align: right; margin-left: auto; max-width: 620px; }
+.aipilot-hero--center .aipilot-hero__content { text-align: center; margin: 0 auto; max-width: 700px; }
+.aipilot-hero picture, .aipilot-hero picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.aipilot-hero__content { position: relative; z-index: 1; padding: 32px; }
+
+/* ── PROPERTY-CARD ── */
+.aipilot-property-card {
+	position: relative; border-radius: 14px; overflow: hidden;
+	background: #fff; border: 1px solid var(--wp--preset--color--border);
+	transition: transform .25s, box-shadow .25s;
+}
+.aipilot-property-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+.property-card-link { text-decoration: none; color: inherit; display: block; }
+.property-card-image { position: relative; }
+.property-card-image img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+
+/* ── CAROUSEL ── */
+.aipilot-carousel, .aipilot-testimonial-slider { position: relative; }
+.aipilot-carousel__track, .aipilot-testimonial__track { transition: transform .4s ease; }
+.aipilot-carousel__prev, .aipilot-carousel__next,
+.aipilot-testimonial__prev, .aipilot-testimonial__next {
+	position: absolute; top: 50%; transform: translateY(-50%);
+	width: 44px; height: 44px; border-radius: 50%;
+	background: #fff; border: 1px solid var(--wp--preset--color--border);
+	cursor: pointer; z-index: 2; font-size: 18px;
+	display: flex; align-items: center; justify-content: center;
+	transition: box-shadow .2s;
+}
+.aipilot-carousel__prev:hover, .aipilot-carousel__next:hover,
+.aipilot-testimonial__prev:hover, .aipilot-testimonial__next:hover { box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.aipilot-carousel__prev, .aipilot-testimonial__prev { left: -22px; }
+.aipilot-carousel__next, .aipilot-testimonial__next { right: -22px; }
+
+/* ── LOGO STRIP ── */
+.aipilot-logo-strip__track::-webkit-scrollbar { height: 0; }
+.aipilot-logo-strip__track { scrollbar-width: none; }
+
+/* ── PROCESS STEP ── */
+.aipilot-process-step + .aipilot-process-step { border-top: 1px solid var(--wp--preset--color--border); padding-top: 20px; }
+
+/* ── TESTIMONIAL ── */
+.aipilot-testimonial-card { flex: 0 0 calc((100% - 24px) / 2); }
+
+/* ── LEAD FORM ── */
+.aipilot-lead-form__form input:focus,
+.aipilot-lead-form__form textarea:focus { border-bottom-color: var(--wp--preset--color--primary) !important; }
+.aipilot-lead-form__submit:hover { background: #e8f0f5 !important; }
+.aipilot-form-success { color: #4CAF50; }
+.aipilot-form-error { color: #F44336; }
+
+/* ── MOBILE ── */
+@media (max-width: 782px) {
+	.aipilot-carousel__prev, .aipilot-carousel__next { display: none; }
+	.aipilot-carousel__slide { flex: 0 0 80vw !important; }
+	.aipilot-testimonial-card { flex: 0 0 100% !important; }
+	.aipilot-testimonial__prev, .aipilot-testimonial__next { display: none; }
+	.aipilot-hero__content { padding: 20px; }
+	.aipilot-lead-form__submit { width: 100%; text-align: center; }
+}
+
+/* ── PREFERS REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+	.aipilot-carousel__track, .aipilot-testimonial__track { transition: none; }
+}

@@ -1,0 +1,66 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/property-carousel",
+    "title":  "Property Carousel",
+    "category":  "aipilot-demo",
+    "icon":  "slides",
+    "description":  "Property cards carousel",
+    "supports":  {
+                     "anchor":  true,
+                     "align":  [
+                                   "wide",
+                                   "full"
+                               ],
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true,
+                                     "blockGap":  true
+                                 },
+                     "color":  {
+                                   "background":  true
+                               }
+                 },
+    "attributes":  {
+                       "sourceMode":  {
+                                          "type":  "string",
+                                          "default":  "dynamic"
+                                      },
+                       "postCount":  {
+                                         "type":  "number",
+                                         "default":  6
+                                     },
+                       "taxonomyFilter":  {
+                                              "type":  "string",
+                                              "default":  ""
+                                          },
+                       "termId":  {
+                                      "type":  "number"
+                                  },
+                       "autoplay":  {
+                                        "type":  "boolean",
+                                        "default":  true
+                                    },
+                       "loop":  {
+                                    "type":  "boolean",
+                                    "default":  true
+                                },
+                       "showArrows":  {
+                                          "type":  "boolean",
+                                          "default":  true
+                                      },
+                       "showPagination":  {
+                                              "type":  "boolean",
+                                              "default":  false
+                                          },
+                       "cardsPerView":  {
+                                            "type":  "number",
+                                            "default":  3
+                                        },
+                       "gap":  {
+                                   "type":  "string",
+                                   "default":  "24px"
+                               }
+                   },
+    "render":  "file:./render.php"
+}

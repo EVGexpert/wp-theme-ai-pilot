@@ -1,0 +1,45 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/property-card",
+    "title":  "Property Card",
+    "category":  "aipilot-demo",
+    "icon":  "building",
+    "description":  "Single property card",
+    "supports":  {
+                     "anchor":  true,
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true
+                                 },
+                     "color":  {
+                                   "background":  true
+                               }
+                 },
+    "attributes":  {
+                       "propertyId":  {
+                                          "type":  "number"
+                                      },
+                       "showArea":  {
+                                        "type":  "boolean",
+                                        "default":  true
+                                    },
+                       "showPrice":  {
+                                         "type":  "boolean",
+                                         "default":  true
+                                     },
+                       "showAddress":  {
+                                           "type":  "boolean",
+                                           "default":  true
+                                       },
+                       "showExcerpt":  {
+                                           "type":  "boolean",
+                                           "default":  false
+                                       },
+                       "showBadge":  {
+                                         "type":  "boolean",
+                                         "default":  true
+                                     }
+                   },
+    "render":  "file:./render.php"
+}

@@ -1,0 +1,43 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/logo-strip",
+    "title":  "Logo Strip",
+    "category":  "aipilot-demo",
+    "icon":  "images-alt2",
+    "description":  "Partner logos strip",
+    "supports":  {
+                     "anchor":  true,
+                     "align":  [
+                                   "wide",
+                                   "full"
+                               ],
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true,
+                                     "blockGap":  true
+                                 },
+                     "color":  {
+                                   "background":  true
+                               }
+                 },
+    "attributes":  {
+                       "autoplay":  {
+                                        "type":  "boolean",
+                                        "default":  false
+                                    },
+                       "visibleItems":  {
+                                            "type":  "number",
+                                            "default":  5
+                                        },
+                       "monochrome":  {
+                                          "type":  "boolean",
+                                          "default":  true
+                                      },
+                       "gap":  {
+                                   "type":  "string",
+                                   "default":  "32px"
+                               }
+                   },
+    "render":  "file:./render.php"
+}

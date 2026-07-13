@@ -1,0 +1,67 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/hero",
+    "title":  "Hero",
+    "category":  "aipilot-demo",
+    "icon":  "cover-image",
+    "description":  "Hero section with background image",
+    "keywords":  [
+                     "hero"
+                 ],
+    "supports":  {
+                     "anchor":  true,
+                     "align":  [
+                                   "wide",
+                                   "full"
+                               ],
+                     "color":  {
+                                   "background":  true,
+                                   "text":  true,
+                                   "gradients":  true
+                               },
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true,
+                                     "blockGap":  true
+                                 },
+                     "typography":  {
+                                        "fontSize":  true,
+                                        "lineHeight":  true
+                                    },
+                     "dimensions":  {
+                                        "minHeight":  true
+                                    }
+                 },
+    "attributes":  {
+                       "desktopImageId":  {
+                                              "type":  "number"
+                                          },
+                       "desktopImageUrl":  {
+                                               "type":  "string"
+                                           },
+                       "mobileImageId":  {
+                                             "type":  "number"
+                                         },
+                       "mobileImageUrl":  {
+                                              "type":  "string"
+                                          },
+                       "overlayColor":  {
+                                            "type":  "string",
+                                            "default":  "rgba(0,0,0,0.35)"
+                                        },
+                       "contentPosition":  {
+                                               "type":  "string",
+                                               "default":  "center-left"
+                                           },
+                       "minHeight":  {
+                                         "type":  "string",
+                                         "default":  "520px"
+                                     },
+                       "borderRadius":  {
+                                            "type":  "string",
+                                            "default":  "22px"
+                                        }
+                   },
+    "render":  "file:./render.php"
+}

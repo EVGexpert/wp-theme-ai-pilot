@@ -1,0 +1,54 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/lead-form",
+    "title":  "Lead Form",
+    "category":  "aipilot-demo",
+    "icon":  "email",
+    "description":  "Contact form with validation",
+    "supports":  {
+                     "anchor":  true,
+                     "align":  [
+                                   "wide"
+                               ],
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true
+                                 },
+                     "color":  {
+                                   "background":  true,
+                                   "text":  true
+                               }
+                 },
+    "attributes":  {
+                       "submitText":  {
+                                          "type":  "string",
+                                          "default":  "Отправить заявку"
+                                      },
+                       "successMessage":  {
+                                              "type":  "string",
+                                              "default":  "Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время."
+                                          },
+                       "errorMessage":  {
+                                            "type":  "string",
+                                            "default":  "Ошибка отправки. Попробуйте позже."
+                                        },
+                       "recipientEmail":  {
+                                              "type":  "string",
+                                              "default":  ""
+                                          },
+                       "showPhone":  {
+                                         "type":  "boolean",
+                                         "default":  true
+                                     },
+                       "showEmail":  {
+                                         "type":  "boolean",
+                                         "default":  true
+                                     },
+                       "showMessage":  {
+                                           "type":  "boolean",
+                                           "default":  true
+                                       }
+                   },
+    "render":  "file:./render.php"
+}

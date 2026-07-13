@@ -1,0 +1,59 @@
+/* === AIPilot Demo — Base Styles === */
+
+:root {
+	--radius-sm: 8px;
+	--radius-md: 14px;
+	--radius-lg: 22px;
+	--radius-pill: 999px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ── Skip link ── */
+.skip-link { position: absolute; top: -100%; left: 0; z-index: 1000; padding: 8px 16px; background: #202020; color: #fff; font-size: 13px; text-decoration: none; }
+.skip-link:focus { top: 0; }
+
+/* ── Focus ── */
+:focus-visible { outline: 2px solid var(--wp--preset--color--primary); outline-offset: 2px; }
+
+/* ── HEADER ── */
+.site-header {
+	position: sticky; top: 0; z-index: 100;
+	background: #fff; border-bottom: 1px solid var(--wp--preset--color--border);
+}
+.site-header > .wp-block-group {
+	max-width: var(--wp--style--global--wide-size);
+	margin: 0 auto; padding: 0 32px;
+	min-height: 72px;
+	display: flex; align-items: center; justify-content: space-between;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+	background: #252525; color: #ccc;
+	padding: 64px 32px 40px;
+}
+.site-footer a { color: #ccc; text-decoration: none; }
+.site-footer a:hover { color: var(--wp--preset--color--primary); }
+
+/* ── Main content ── */
+.site-main {
+	min-height: 60vh;
+}
+.site-main > :first-child { margin-top: 0; }
+.site-main > :last-child { margin-bottom: 0; }
+
+/* ── Mobile ── */
+@media (max-width: 782px) {
+	.site-header > .wp-block-group { padding: 0 16px; }
+	.site-footer { padding: 48px 16px 32px; }
+}
+
+/* ── Smooth animation ── */
+@media (prefers-reduced-motion: no-preference) {
+	.fade-in { animation: fadeIn .6s ease-out; }
+	@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+}

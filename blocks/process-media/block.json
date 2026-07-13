@@ -1,0 +1,52 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/process-media",
+    "title":  "Process Media",
+    "category":  "aipilot-demo",
+    "icon":  "format-image",
+    "description":  "Process section image",
+    "supports":  {
+                     "anchor":  true,
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true
+                                 },
+                     "align":  [
+                                   "left",
+                                   "center",
+                                   "right"
+                               ]
+                 },
+    "attributes":  {
+                       "desktopImageId":  {
+                                              "type":  "number"
+                                          },
+                       "desktopImageUrl":  {
+                                               "type":  "string"
+                                           },
+                       "mobileImageId":  {
+                                             "type":  "number"
+                                         },
+                       "mobileImageUrl":  {
+                                              "type":  "string"
+                                          },
+                       "alt":  {
+                                   "type":  "string",
+                                   "default":  ""
+                               },
+                       "aspectRatio":  {
+                                           "type":  "string",
+                                           "default":  "3/4"
+                                       },
+                       "showOnMobile":  {
+                                            "type":  "boolean",
+                                            "default":  false
+                                        },
+                       "radius":  {
+                                      "type":  "string",
+                                      "default":  "22px"
+                                  }
+                   },
+    "render":  "file:./render.php"
+}

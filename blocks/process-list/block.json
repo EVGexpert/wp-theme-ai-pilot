@@ -1,0 +1,38 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/process-list",
+    "title":  "Process List",
+    "category":  "aipilot-demo",
+    "icon":  "list-view",
+    "description":  "Process steps list",
+    "supports":  {
+                     "anchor":  true,
+                     "align":  [
+                                   "wide"
+                               ],
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true,
+                                     "blockGap":  true
+                                 },
+                     "color":  {
+                                   "background":  true
+                               }
+                 },
+    "attributes":  {
+                       "showDividers":  {
+                                            "type":  "boolean",
+                                            "default":  true
+                                        },
+                       "showNumbers":  {
+                                           "type":  "boolean",
+                                           "default":  true
+                                       },
+                       "gap":  {
+                                   "type":  "string",
+                                   "default":  "32px"
+                               }
+                   },
+    "render":  "file:./render.php"
+}

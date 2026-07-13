@@ -1,0 +1,50 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/process-step",
+    "title":  "Process Step",
+    "category":  "aipilot-demo",
+    "icon":  "arrow-right-alt",
+    "description":  "Single process step",
+    "parent":  [
+                   "aipilot-demo-blocks/process-list"
+               ],
+    "supports":  {
+                     "anchor":  true,
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true
+                                 },
+                     "color":  {
+                                   "background":  true,
+                                   "text":  true
+                               },
+                     "typography":  {
+                                        "fontSize":  true,
+                                        "lineHeight":  true
+                                    }
+                 },
+    "attributes":  {
+                       "stepNumber":  {
+                                          "type":  "number",
+                                          "default":  1
+                                      },
+                       "title":  {
+                                     "type":  "string",
+                                     "default":  "Шаг"
+                                 },
+                       "description":  {
+                                           "type":  "string",
+                                           "default":  "Описание шага."
+                                       },
+                       "iconSvg":  {
+                                       "type":  "string",
+                                       "default":  "search"
+                                   },
+                       "hideNumber":  {
+                                          "type":  "boolean",
+                                          "default":  false
+                                      }
+                   },
+    "render":  "file:./render.php"
+}

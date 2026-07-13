@@ -1,0 +1,56 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/testimonial-card",
+    "title":  "Testimonial Card",
+    "category":  "aipilot-demo",
+    "icon":  "admin-comments",
+    "description":  "Single testimonial card",
+    "parent":  [
+                   "aipilot-demo-blocks/testimonial-slider"
+               ],
+    "supports":  {
+                     "anchor":  true,
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true
+                                 },
+                     "color":  {
+                                   "background":  true,
+                                   "text":  true
+                               },
+                     "typography":  {
+                                        "fontSize":  true,
+                                        "lineHeight":  true
+                                    }
+                 },
+    "attributes":  {
+                       "quote":  {
+                                     "type":  "string",
+                                     "default":  "Отличная работа! Всё было сделано быстро и профессионально."
+                                 },
+                       "authorName":  {
+                                          "type":  "string",
+                                          "default":  "Иван Иванов"
+                                      },
+                       "authorRole":  {
+                                          "type":  "string",
+                                          "default":  "CEO, Компания"
+                                      },
+                       "avatarId":  {
+                                        "type":  "number"
+                                    },
+                       "avatarUrl":  {
+                                         "type":  "string"
+                                     },
+                       "rating":  {
+                                      "type":  "number",
+                                      "default":  5
+                                  },
+                       "showQuoteMark":  {
+                                             "type":  "boolean",
+                                             "default":  true
+                                         }
+                   },
+    "render":  "file:./render.php"
+}

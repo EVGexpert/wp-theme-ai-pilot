@@ -1,0 +1,49 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "aipilot-demo-blocks/stat-item",
+    "title":  "Stat Item",
+    "category":  "aipilot-demo",
+    "icon":  "star-filled",
+    "description":  "Single stat metric",
+    "parent":  [
+                   "aipilot-demo-blocks/stats-grid"
+               ],
+    "supports":  {
+                     "anchor":  true,
+                     "spacing":  {
+                                     "margin":  true,
+                                     "padding":  true
+                                 },
+                     "color":  {
+                                   "background":  true,
+                                   "text":  true
+                               },
+                     "typography":  {
+                                        "fontSize":  true,
+                                        "lineHeight":  true
+                                    }
+                 },
+    "attributes":  {
+                       "prefix":  {
+                                      "type":  "string"
+                                  },
+                       "value":  {
+                                     "type":  "string",
+                                     "default":  "100"
+                                 },
+                       "suffix":  {
+                                      "type":  "string",
+                                      "default":  "+"
+                                  },
+                       "label":  {
+                                     "type":  "string",
+                                     "default":  "Объектов"
+                                 },
+                       "showCounter":  {
+                                           "type":  "boolean",
+                                           "default":  false
+                                       }
+                   },
+    "render":  "file:./render.php"
+}
