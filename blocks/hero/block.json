@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "cover-image",
     "description":  "Hero section with background image",
+    "textdomain":  "aipilot-demo",
     "keywords":  [
                      "hero"
                  ],
@@ -63,5 +64,6 @@
                                             "default":  "22px"
                                         }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

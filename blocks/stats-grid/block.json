@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "grid-view",
     "description":  "Statistics grid layout",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "align":  [
@@ -44,5 +45,6 @@
                                             "default":  true
                                         }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

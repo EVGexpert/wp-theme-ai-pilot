@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "slides",
     "description":  "Property cards carousel",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "align":  [
@@ -49,18 +50,27 @@
                                           "type":  "boolean",
                                           "default":  true
                                       },
-                       "showPagination":  {
-                                              "type":  "boolean",
-                                              "default":  false
-                                          },
-                       "cardsPerView":  {
-                                            "type":  "number",
-                                            "default":  3
-                                        },
+                        "showDots":  {
+                                           "type":  "boolean",
+                                           "default":  false
+                                       },
+                        "cardsPerView":  {
+                                             "type":  "number",
+                                             "default":  3
+                                         },
+                        "tabletCardsPerView":  {
+                                                   "type":  "number",
+                                                   "default":  2
+                                               },
+                        "mobileCardsPerView":  {
+                                                   "type":  "number",
+                                                   "default":  1
+                                               },
                        "gap":  {
                                    "type":  "string",
                                    "default":  "24px"
                                }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

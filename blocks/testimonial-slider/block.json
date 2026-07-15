@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "testimonial",
     "description":  "Testimonials carousel",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "align":  [
@@ -47,5 +48,6 @@
                                    "default":  "24px"
                                }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

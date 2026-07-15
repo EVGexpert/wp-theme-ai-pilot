@@ -25,6 +25,7 @@ function aipilot_asset_version( $rel_path ) {
 // THEME SETUP
 // ═══════════════════════════════════════════
 function aipilot_demo_setup() {
+	load_theme_textdomain( 'aipilot-demo', get_template_directory() . '/languages' );
 	add_theme_support( 'wp-block-styles' );
 	add_theme_support( 'editor-styles' );
 	add_editor_style( 'assets/css/editor.css' );

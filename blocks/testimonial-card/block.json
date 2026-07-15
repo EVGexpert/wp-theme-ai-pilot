@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "admin-comments",
     "description":  "Single testimonial card",
+    "textdomain":  "aipilot-demo",
     "parent":  [
                    "aipilot-demo-blocks/testimonial-slider"
                ],
@@ -52,5 +53,6 @@
                                              "default":  true
                                          }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "star-filled",
     "description":  "Single stat metric",
+    "textdomain":  "aipilot-demo",
     "parent":  [
                    "aipilot-demo-blocks/stats-grid"
                ],
@@ -45,5 +46,6 @@
                                            "default":  false
                                        }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

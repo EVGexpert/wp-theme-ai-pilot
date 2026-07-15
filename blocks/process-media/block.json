@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "format-image",
     "description":  "Process section image",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "spacing":  {
@@ -48,5 +49,6 @@
                                       "default":  "22px"
                                   }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

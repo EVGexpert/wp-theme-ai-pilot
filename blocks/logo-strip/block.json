@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "images-alt2",
     "description":  "Partner logos strip",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "align":  [
@@ -22,11 +23,7 @@
                                }
                  },
     "attributes":  {
-                       "autoplay":  {
-                                        "type":  "boolean",
-                                        "default":  false
-                                    },
-                       "visibleItems":  {
+                        "visibleItems":  {
                                             "type":  "number",
                                             "default":  5
                                         },
@@ -39,5 +36,6 @@
                                    "default":  "32px"
                                }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

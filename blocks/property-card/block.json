@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "building",
     "description":  "Single property card",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "spacing":  {
@@ -17,9 +18,13 @@
                                }
                  },
     "attributes":  {
-                       "propertyId":  {
-                                          "type":  "number"
-                                      },
+                        "propertyId":  {
+                                           "type":  "number"
+                                       },
+                        "variant":  {
+                                        "type":  "string",
+                                        "default":  "detailed"
+                                    },
                        "showArea":  {
                                         "type":  "boolean",
                                         "default":  true
@@ -41,5 +46,6 @@
                                          "default":  true
                                      }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

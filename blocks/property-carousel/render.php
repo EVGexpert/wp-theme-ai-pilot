@@ -8,7 +8,7 @@ $gap         = $attributes['gap'] ?? '24px';
 $tax         = $attributes['taxonomyFilter'] ?? '';
 $term        = $attributes['termId'] ?? 0;
 $show_arrows = $attributes['showArrows'] ?? true;
-$show_dots   = $attributes['showPagination'] ?? true;
+$show_dots   = $attributes['showDots'] ?? true;
 $autoplay    = $attributes['autoplay'] ?? false;
 $loop        = $attributes['loop'] ?? true;
 

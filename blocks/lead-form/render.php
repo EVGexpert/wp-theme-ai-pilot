@@ -6,7 +6,6 @@ $showPh       = $attributes['showPhone'] ?? true;
 $showEm       = $attributes['showEmail'] ?? true;
 $showMsg      = $attributes['showMessage'] ?? true;
 $phone_req    = $attributes['phoneRequired'] ?? true;
-$recipient    = $attributes['recipientEmail'] ?? '';
 $redirect_url = $attributes['redirectUrl'] ?? '';
 
 $form_id = 'aipilot-form-' . wp_unique_id();
@@ -17,9 +16,6 @@ $form_id = 'aipilot-form-' . wp_unique_id();
 		data-error="<?php echo esc_attr( $errorMsg ); ?>"<?php echo $redirect_url ? ' data-redirect="' . esc_url( $redirect_url ) . '"' : ''; ?>>
 		<?php wp_nonce_field( 'aipilot_lead_form', 'nonce', false ); ?>
 		<input type="hidden" name="action" value="aipilot_lead_form">
-		<?php if ( $recipient ) : ?>
-		<input type="hidden" name="recipient_email" value="<?php echo esc_attr( $recipient ); ?>">
-		<?php endif; ?>
 		<div class="aipilot-form-row">
 			<div class="aipilot-form-field">
 				<label for="<?php echo esc_attr( $form_id ); ?>-name" class="aipilot-form-label">Имя *</label>

@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "marker",
     "description":  "Round consultation badge",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "spacing":  {
@@ -42,5 +43,6 @@
                                             "default":  false
                                         }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

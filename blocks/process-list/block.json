@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "list-view",
     "description":  "Process steps list",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "align":  [
@@ -34,5 +35,6 @@
                                    "default":  "32px"
                                }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }

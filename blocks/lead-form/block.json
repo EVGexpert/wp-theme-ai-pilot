@@ -6,6 +6,7 @@
     "category":  "aipilot-demo",
     "icon":  "email",
     "description":  "Contact form with validation",
+    "textdomain":  "aipilot-demo",
     "supports":  {
                      "anchor":  true,
                      "align":  [
@@ -58,5 +59,6 @@
                                             "default":  ""
                                         }
                    },
+    "style":  "file:../blocks.css",
     "render":  "file:./render.php"
 }
