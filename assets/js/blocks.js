@@ -24,24 +24,9 @@
 
 	// 1. CONTAINER BLOCKS (with InnerBlocks)
 
-	registerBlockType( 'aipilot-demo-blocks/hero', {
-		edit: function() {
-			var blockProps = useBlockProps();
-			return el( 'div', blockProps,
-				el( Placeholder, {
-					icon: 'cover-image',
-					label: __( 'Hero', 'aipilot-demo' ),
-					instructions: __( 'Hero section with background image. Inner blocks shown on top.', 'aipilot-demo' )
-				},
-				el( InnerBlocks, {
-					templateLock: false,
-					renderAppender: InnerBlocks.ButtonBlockAppender
-				} )
-				)
-			);
-		},
-		save: function() { return null; }
-	} );
+	// NOTE: 'aipilot-demo-blocks/hero' migrated to the aipilot-demo-blocks plugin
+	// (src/hero/, built with @wordpress/scripts). Do not register it here — it would
+	// cause a "Block is already registered" error in the editor.
 
 	registerBlockType( 'aipilot-demo-blocks/stats-grid', {
 		edit: function() {
