@@ -83,7 +83,7 @@ add_filter( 'block_categories_all', 'aipilot_demo_block_categories' );
 function aipilot_demo_editor_assets() {
 	$deps = array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-server-side-render', 'wp-i18n' );
 	wp_enqueue_script( 'aipilot-demo-editor', get_template_directory_uri() . '/assets/js/editor.js', $deps, aipilot_asset_version( '/assets/js/editor.js' ), true );
-	wp_enqueue_script( 'aipilot-demo-blocks', get_template_directory_uri() . '/assets/js/blocks.js', $deps, aipilot_asset_version( '/assets/js/blocks.js' ), true );
+	// blocks.js — all 14 blocks migrated to aipilot-demo-blocks plugin (src/*).
 }
 add_action( 'enqueue_block_editor_assets', 'aipilot_demo_editor_assets' );
 
