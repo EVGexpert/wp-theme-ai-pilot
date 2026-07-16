@@ -81,7 +81,6 @@ function aipilot_demo_block_categories( $categories ) {
 add_filter( 'block_categories_all', 'aipilot_demo_block_categories' );
 
 function aipilot_demo_editor_assets() {
-	// Регистрация блоков в JS-стороне редактора (без этого Gutenberg считает блоки "unsupported").
 	$deps = array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-server-side-render', 'wp-i18n' );
 	wp_enqueue_script( 'aipilot-demo-editor', get_template_directory_uri() . '/assets/js/editor.js', $deps, aipilot_asset_version( '/assets/js/editor.js' ), true );
 	wp_enqueue_script( 'aipilot-demo-blocks', get_template_directory_uri() . '/assets/js/blocks.js', $deps, aipilot_asset_version( '/assets/js/blocks.js' ), true );
@@ -172,17 +171,7 @@ add_action( 'init', 'aipilot_register_property_cpt' );
 // ═══════════════════════════════════════════
 // BLOCK REGISTRATION
 // ═══════════════════════════════════════════
-function aipilot_register_blocks() {
-	$blocks = array(
-		'hero', 'stats-grid', 'stat-item', 'logo-strip', 'logo-item',
-		'property-carousel', 'property-card', 'process-media', 'consultation-badge',
-		'process-list', 'process-step', 'testimonial-slider', 'testimonial-card', 'lead-form'
-	);
-	foreach ( $blocks as $block ) {
-		register_block_type( get_template_directory() . '/blocks/' . $block );
-	}
-}
-add_action( 'init', 'aipilot_register_blocks' );
+// Blocks registered via aipilot-demo-blocks plugin (build/)
 
 // ═══════════════════════════════════════════
 // DYNAMIC RENDER HELPERS
